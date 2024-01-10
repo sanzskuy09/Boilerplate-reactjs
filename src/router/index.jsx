@@ -1,32 +1,9 @@
 import { useState } from "react";
 import { Navigate, useNavigate, useRoutes } from "react-router-dom";
 
-function Home() {
-  return (
-    <div style={{ padding: 20 }}>
-      <h2>Home View</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adip.</p>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div style={{ padding: 20 }}>
-      <h2>About View</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adip.</p>
-    </div>
-  );
-}
-
-function NoMatch() {
-  return (
-    <div style={{ padding: 20 }}>
-      <h2>404: Page Not Found</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adip.</p>
-    </div>
-  );
-}
+import Homepage from "@/pages/Homepage";
+import About from "@/pages/About";
+import Page404 from "@/pages/404";
 
 function Login({ onLogin }) {
   const [creds, setCreds] = useState({});
@@ -86,7 +63,7 @@ export default function Routes() {
   console.log(user);
 
   const element = useRoutes([
-    { path: "/", element: <Home /> },
+    { path: "/", element: <Homepage /> },
     { path: "/login", element: <Login onLogin={setUser} /> },
     {
       path: "/about",
@@ -96,7 +73,7 @@ export default function Routes() {
         </ProtectedRoute>
       ),
     },
-    { path: "*", element: <NoMatch /> },
+    { path: "*", element: <Page404 /> },
     // {
     //   path: "/posts",
     //   element: <Posts />,
