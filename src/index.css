@@ -22,3 +22,15 @@ body {
 .shadow-box-lg {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+
+.ant-btn {
+  border: none;
+  outline: none;
+}
+
+.ant-btn-default:hover,
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover.ant-btn {
+  /* color: inherit; */
+  border: none;
+  outline: none;
+}
