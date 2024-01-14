@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 
-import Homepage from "@/pages/Homepage";
-import About from "@/pages/About";
+import Dashboard from "@/pages/Dashboard";
 import Login from "@/pages/Login";
-import Page404 from "@/pages/404";
+import ErrorPage from "@/pages/ErrorPage";
+
+// Route Dashboard Monitoring
+import Overdue from "@/pages/Menu/DashboardMonitoring/Overdue";
+import MoveTo from "@/pages/Menu/DashboardMonitoring/MoveTo";
 
 export default function Routes() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(true);
 
   // Router Protected
   function ProtectedRoute({ user, children }) {
@@ -18,28 +21,43 @@ export default function Routes() {
     return children;
   }
 
-  console.log(user);
-
   const element = useRoutes([
-    { path: "/", element: <Homepage /> },
-    { path: "/login", element: <Login onLogin={setUser} /> },
+    { path: "/", element: <Dashboard /> },
     {
-      path: "/about",
+      path: "/dashboard/overdue",
       element: (
         <ProtectedRoute user={user}>
-          <About />
+          <Overdue />
         </ProtectedRoute>
       ),
     },
-    { path: "*", element: <Page404 /> },
+    {
+      path: "/dashboard/move-to",
+      element: (
+        <ProtectedRoute user={user}>
+          <MoveTo />
+        </ProtectedRoute>
+      ),
+    },
+    { path: "/login", element: <Login onLogin={setUser} /> },
+    { path: "*", element: <ErrorPage /> },
     // {
-    //   path: "/posts",
-    //   element: <Posts />,
+    //   path: "invoices",
+    //   element: <Invoices />,
     //   children: [
-    //     { index: true, element: <PostLists /> },
-    //     { path: ":slug", element: <Post /> },
+    //     {
+    //       index: true,
+    //       element: (
+    //         <ProtectedRoute user={user}>
+    //           <About />
+    //         </ProtectedRoute>
+    //       ),
+    //     },
+    //     { path: ":id", element: <Invoice /> },
+    //     { path: "sent", element: <SentInvoices /> },
     //   ],
     // },
   ]);
+
   return element;
 }

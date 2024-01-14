@@ -11,9 +11,13 @@ export default function AppLayout() {
     <>
       <ToastContainer position="top-center" />
 
-      <Navbar />
+      <div className="flex">
+        <Navbar />
 
-      <Routes />
+        <div className="w-full p-8 bg-background">
+          <Routes />
+        </div>
+      </div>
     </>
   );
 }
